@@ -11,15 +11,13 @@ owner = ""
 # Set a password, blank for no password
 password = ""
 
+if not os.path.exists(directory):
+        os.makedirs(directory)
+
 def supload():
     filename = "Screenshot_" + datetime.datetime.now().strftime("%m-%d-%y_%I.%M.%S%p") + ".png"
     path = os.path.join(directory, filename)
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-    try:
-        os.system("scrot -s " + path)
-    except:
-        sys.exit(0)
+    os.system("scrot -s " + path)
 
     file = {'file': (filename, open(path, 'rb'), 'image/png')}
     url = "http://frogbox.es/whff/upload.php?raw"
@@ -31,14 +29,7 @@ def supload():
 def tupload():
     filename = "Clipboard_" + datetime.datetime.now().strftime("%m-%d-%y_%I.%M.%S%p") + ".txt"
     path = os.path.join(directory, filename)
-    if not os.path.exists(directory):
-        os.makedirs(directory)
- 
-    try:                                                                                                                                                          
-        text = clipboard.paste()
-    except:
-        sys.exit(0)
- 
+    text = clipboard.paste()
     f = open(path, 'w')
     f.write(text)
     f.close()
