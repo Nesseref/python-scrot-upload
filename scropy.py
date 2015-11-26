@@ -25,6 +25,7 @@ def supload():
     r = requests.post(url, files=file, data=payload)
 
     clipboard.copy("http://i.frogbox.es/" + r.text + ".png")
+    os.system("notify-send \"Screenshot uploaded!\"")
 
 def tupload():
     filename = "Clipboard_" + datetime.datetime.now().strftime("%m-%d-%y_%I.%M.%S%p") + ".txt"
@@ -40,6 +41,7 @@ def tupload():
     r = requests.post(url, files=file, data=payload)
  
     clipboard.copy("http://i.frogbox.es/" + r.text + ".txt")
+    os.system("notify-send \"Clip uploaded!\"")
  
 if sys.argv[1] == "-s":
     supload()
