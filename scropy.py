@@ -12,7 +12,7 @@ if not os.path.exists(directory):
         os.makedirs(directory)
 os.system("scrot -s " + path)
 
-file = {'file': open(path, 'rb')}
+file = {'file': (filename, open(path, 'rb'), 'image/png')}
 url = "http://frogbox.es/whff/upload.php?raw"
 r = requests.post(url, files=file)
 
