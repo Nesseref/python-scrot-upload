@@ -17,7 +17,7 @@ if not os.path.exists(directory):
 def supload():
     filename = "Screenshot_" + datetime.datetime.now().strftime("%m-%d-%y_%I.%M.%S%p") + ".png"
     path = os.path.join(directory, filename)
-    os.system("scrot -s " + path)
+    os.system("screencapture -s " + path)
 
     file = {'file': (filename, open(path, 'rb'), 'image/png')}
     url = "http://frogbox.es/whff/upload.php?raw"
@@ -25,7 +25,6 @@ def supload():
     r = requests.post(url, files=file, data=payload)
 
     clipboard.copy("http://i.frogbox.es/" + r.text + ".png")
-    os.system("notify-send \"Screenshot uploaded!\"")
 
 def tupload():
     filename = "Clipboard_" + datetime.datetime.now().strftime("%m-%d-%y_%I.%M.%S%p") + ".txt"
@@ -41,7 +40,6 @@ def tupload():
     r = requests.post(url, files=file, data=payload)
  
     clipboard.copy("http://i.frogbox.es/" + r.text + ".txt")
-    os.system("notify-send \"Clip uploaded!\"")
  
 if sys.argv[1] == "-s":
     supload()
@@ -50,5 +48,4 @@ elif sys.argv[1] == "-t":
 else:
     print "-s [screenshot] / -t [text clipboard]"
     sys.exit(0)
-
 
