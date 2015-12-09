@@ -10,6 +10,7 @@ directory = os.path.expanduser("~/screenshots/")
 owner = ""
 # Set a password, blank for no password
 password = ""
+url = "https://frogbox.es/whff/upload.php?raw"
 
 if not os.path.exists(directory):
         os.makedirs(directory)
@@ -20,11 +21,10 @@ def supload():
     os.system("scrot -s " + path)
 
     file = {'file': (filename, open(path, 'rb'), 'image/png')}
-    url = "http://frogbox.es/whff/upload.php?raw"
     payload = {'owner': owner, 'password':password}
     r = requests.post(url, files=file, data=payload)
 
-    clipboard.copy("http://i.frogbox.es/" + r.text + ".png")
+    clipboard.copy("https://i.frogbox.es/" + r.text + ".png")
     os.system("notify-send \"Screenshot uploaded!\"")
 
 def tupload():
@@ -36,11 +36,10 @@ def tupload():
     f.close()
  
     file = {'file': (filename, open(path, 'r'), 'text/plain')}
-    url = "http://frogbox.es/whff/upload.php?raw"
     payload = {'owner': owner, 'password':password}
     r = requests.post(url, files=file, data=payload)
  
-    clipboard.copy("http://i.frogbox.es/" + r.text + ".txt")
+    clipboard.copy("https://i.frogbox.es/" + r.text + ".txt")
     os.system("notify-send \"Clip uploaded!\"")
  
 if sys.argv[1] == "-s":
